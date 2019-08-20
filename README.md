@@ -27,4 +27,15 @@ Comecei um curso de Excel Avançado e gostaria de compartilhar minhas experiênc
  *Aleatorioentre* - Gera número aleatórios. Parâmetros: inferior; superior.
  - = aleatorioentre(-100;100)
  
+ ## Aula 03
+ 
+ ## Aula 04
+ 
+ ## Aula 05
+ 
+ ## Aula 06
+ 
+ ## Aula 07
+ 
+ ## Aula 08
  
