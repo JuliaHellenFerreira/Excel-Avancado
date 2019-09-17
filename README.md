@@ -1,41 +1,124 @@
 # Excel Avançado
 
-Comecei um curso de Excel Avançado e gostaria de compartilhar minhas experiências. Meu objetivo é elaborar um matérial simples e com vários exemplos vistos em aula. Minhas explicações não serão muito elaboradas pois tenho pouco domínio sobre esta área do Excel.
+# Macro 1
 
-## Aula 01
- Fizemos uma revisão básica onde relembramos como:
- - Validar Dados;
- - Formatação Condicional;
- - Fórmulas simples.
- 
- ## Aula 02
- 
- Vamos análisar duas funções e como utilizá-las:
+Sub Macro1()
 
-*SE* - A função se utiliza três parâmetros: Valor Lógico; Se Verdadeiro; Se Falso. Vejamos um exemplo: 
- - = C2<2; "Correto"; "Errado"
+' Aula 10/10/2019
+
+Dim linha, contador As Integer
+Dim juros As Double
+linha = 7
+Range("A8:A100").Clear
+If Range("C5").Value = 1 Then
+Range("A7:D100").Clear
+ Range("A7").Value = "Desconto 10%"
+ Range("B7").Value = 1
+ Range("C7").FormulaLocal = "=C3 + 5"
+ Range("C7").Value = CDate(Range("C7").Value)
+ Range("D7").FormulaLocal = "=C4-(C4*10%)"
+ Range("D7").Value = CCur(Range("=D7").Value)
+ Dim a, b As Integer
+ a = Range("A12").Value
+ b = Range("A13").Value
+ Range("A12:A13").Clear
+ Range("A14").Value = a
+ Range("A15").Value = b
+ Range("C3").Font.Color = vbBlue
+ Range("C4").Font.Color = vbRed
+ Range("D7:D1000").Select
+   With Selection.Font
+                 .Color = RGB(10, 150, 30)
+                 .Bold = "True"
+                 .Size = 12
+                 .Name = "Arial"
+  End With
  
-*PROCV* - Está função foi usada para associar uma planilha a outra. Seus parâmetros são: Valor encontrado; matriz; número da coluna; [buscar].
- - = Procv(C2; G2:G7; 2; 0)
- - = Procv( C2; matriz; 2; 0) # Neste caso usei "Definir nome" para o intervalo.
+End If
+
+If (Range("C5").Value > 1 And Range("C5").Value <= 5) Then
+ Range("A7").Clear
+ Range("A7:D100").Clear
+ For contador = 1 To Range("C5").Value
+ Range("B" & linha).Select
+ ActiveCell.Formula = contador
+ Range("C" & linha).Select
+ ActiveCell.Formula = CDate(WorksheetFunction.EDate(Range("c3").Value, contador))
+ Range("D" & linha).Select
+ ActiveCell.Formula = "=C4/C5"
+ Range("D" & linha).Value = CCur(Range("D" & linha).Value)
+ linha = linha + 1
+ Range("C3").Font.Color = vbBlue
+ Range("C4").Font.Color = vbRed
+ Range("D7:D1000").Select
+   With Selection.Font
+                 .Color = RGB(10, 150, 30)
+                 .Bold = "True"
+                 .Size = 12
+                 .Name = "Arial"
+                 
+   End With
+ Next contador
  
- *Concatenar* - Temos várias formas de concatenar células. Podemos ver:
- - D4&C4
- - D4&" "&C4 
- - concatenar(D4;C4)
- 
- *Aleatorioentre* - Gera número aleatórios. Parâmetros: inferior; superior.
- - = aleatorioentre(-100;100)
- 
- ## Aula 03
- 
- ## Aula 04
- 
- ## Aula 05
- 
- ## Aula 06
- 
- ## Aula 07
- 
- ## Aula 08
+End
+
+End If
+
+If (Range("C5").Value >= 6 And Range("C5").Value <= 9) Then
+ Range("A7:D100").Clear
+ Range("A7").Clear
+ For contador = 1 To Range("C5").Value
+ Range("B" & linha).Select
+ ActiveCell.Formula = contador
+ Range("C" & linha).Select
+ ActiveCell.Formula = CDate(WorksheetFunction.EDate(Range("c3").Value, contador))
+ Range("D" & linha).Select
+ ActiveCell.Formula = "=((C4/C5)*101%)"
+ Range("D" & linha).Value = CCur(Range("D" & linha).Value)
+ linha = linha + 1
+ Range("C3").Font.Color = vbBlue
+ Range("C4").Font.Color = vbRed
+ Range("D7:D1000").Select
+   With Selection.Font
+                 .Color = RGB(10, 150, 30)
+                 .Bold = "True"
+                 .Size = 12
+                 .Name = "Arial"
+   End With
+ Next contador
+
+End
+
+End If
+
+If Range("C5").Value >= 10 Then
+ juros = 0.01
+ Range("A7").Clear
+ Range("A7:D100").Clear
+ For contador = 1 To Range("C5").Value
+ Range("B" & linha).Select
+ ActiveCell.Formula = contador
+ Range("C" & linha).Select
+ ActiveCell.Formula = CDate(WorksheetFunction.EDate(Range("c3").Value, contador))
+ Range("D" & linha).Select
+ ActiveCell.Formula = (Range("C4").Value \ Range("C5").Value) + (Range("C4") \ Range("C5").Value) * juros
+ Range("D" & linha).Value = CCur(Range("D" & linha).Value)
+ linha = linha + 1
+ juros = juros + 0.01
+ Range("C3").Font.Color = vbBlue
+ Range("C4").Font.Color = vbRed
+ Range("D7:D1000").Select
+   With Selection.Font
+                 .Color = RGB(10, 150, 30)
+                 .Bold = "True"
+                 .Size = 12
+                 .Name = "Arial"
+   End With
+ Next contador
+
+End
+
+End If
+                 
+End Sub
  
